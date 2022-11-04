@@ -73,5 +73,3 @@ if __name__ == "__main__":
             print(results)
             if results.get("challenge_url"):
                 print("NOTE: You got a challenge. Use a browser to login into LinkedIn from the same IP you are running the script from and try again.")
-
-# Thanks to https://github.com/nickls/linkedin-unofficial-api for API documentation
