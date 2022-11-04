@@ -1,6 +1,6 @@
 # peepedIn
 
-Gather and scrape info from the LinkedIn profiles of a company's employees.
+Peep the LinkedIn profiles of a company's employees.
 
 There are other ways to do this kind of thing, but this is simple, targeted to what I need it to do, and easy to integrate into other projects.
 
