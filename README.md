@@ -2,7 +2,9 @@
 
 Gather and scrape info from the LinkedIn profiles of a company's employees.
 
-There are other ways to do this kind of thing, but this is simple and more targeted to what I need it to do.
+There are other ways to do this kind of thing, but this is simple, targeted to what I need it to do, and easy to integrate into other projects.
+
+Results are limited by the connections of the account used to run the tool. Keep pumping those sock puppets! 
 
 ## Install
 
