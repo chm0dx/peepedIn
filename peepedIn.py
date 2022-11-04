@@ -3,7 +3,6 @@ from argparse import RawTextHelpFormatter
 import requests
 import re
 import string
-import sys
 
 def scrape(company_url,user,pw):
 		li_base_url = "https://www.linkedin.com/"
