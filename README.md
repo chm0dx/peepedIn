@@ -1,5 +1,7 @@
 # peepedIn
 
+## NOTE: Broken at the moment due to LinkedIn changes. Working on updates soon...
+
 Peep the LinkedIn profiles of a company's employees.
 
 There are other ways to do this kind of thing, but this is simple, targeted to what I need it to do, and easy to integrate into other projects.
