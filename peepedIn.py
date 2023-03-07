@@ -1,12 +1,14 @@
 import argparse
 from argparse import RawTextHelpFormatter
 import requests
-import re
 import string
 
 def scrape(company_url,user,pw):
 		li_base_url = "https://www.linkedin.com/"
 		li_login_url = li_base_url + "uas/authenticate"
+		if company_url.endswith("/"):
+			company_url = company_url[:-1]
+		company_public_id = company_url.split("/")[-1]
 
 		session = requests.Session()
 		session.get(li_login_url)
@@ -29,9 +31,10 @@ def scrape(company_url,user,pw):
 		if r.json()['login_result'] != "PASS":
 				return r.json()
 
-		company_profile = session.get(company_url).text
-		company_id = re.findall(r'urn:li:fsd_company:([0-9]*)&',company_profile)[0]
+		r = session.get(f"https://www.linkedin.com/voyager/api/organization/companies?decorationId=com.linkedin.voyager.deco.organization.web.WebFullCompanyMain-12&q=universalName&universalName={company_public_id}")
+		company_id = r.json().get("elements")[0].get("entityUrn").split(":")[-1]
 		r = session.get(f"https://www.linkedin.com/voyager/api/search/blended?count=49&filters=List(resultType-%3EPEOPLE,currentCompany-%3E{company_id})&origin=GLOBAL_SEARCH_HEADER&q=all&start=0&queryContext=List(spellCorrectionEnabled-%3Etrue,relatedSearchesEnabled-%3Etrue,kcardTypes-%3EPROFILE%7CCOMPANY)")
+		
 		results = r.json()["elements"][0]["elements"]
 		peeps = []
 
@@ -53,7 +56,7 @@ def scrape(company_url,user,pw):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description = "Return a list of employee profiles and info from a company's LinkedIn profile URL.",
-        epilog = '''Example: python3 peepedIn.py url email password
+        epilog = '''Example: python3 peepedIn.py company_linkedin_url email password
         ''',
         formatter_class=RawTextHelpFormatter)
     parser.add_argument('url', help="The LinkedIn profile URL of the company you want to peep")
